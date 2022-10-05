@@ -1,0 +1,240 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+
+  --input-color: #323238;
+  --timer-color: hsla(240, 6%, 21%, 1);
+  --elements-darkmode: #c4c4cc;
+
+  --bg-dark: #121214;
+  --bg-card: #e1e1e6;
+  --bg-card-active: #02799d;
+  --btn-on: hsl(194, 100%, 63%);
+  --inner-card-active: #ffffff;
+
+  --shadow: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  --shadow-darkmode: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.315));
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: calc(100% - 5vh) 1vh;
+
+  background-color: var(--bg-color);
+  transition: background 0.5s linear, color 0.5s linear;
+}
+
+input[type='checkbox'] {
+  display: none;
+}
+
+#theme {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+}
+
+#theme svg {
+  cursor: pointer;
+  filter: var(--shadow);
+}
+
+.dark {
+  background-color: var(--bg-dark);
+}
+
+.dark #timer,
+.dark #controls svg path,
+.dark #theme svg path {
+  color: var(--elements-darkmode);
+  fill: var(--elements-darkmode);
+}
+
+.dark #timer,
+.dark #controls,
+.dark #theme {
+  filter: var(--shadow-darkmode);
+}
+
+.dark #controls .controls-btn:active > svg path {
+  fill: var(--btn-on);
+}
+
+.dark .card {
+  filter: var(--shadow-darkmode);
+}
+
+.page {
+  display: flex;
+  margin: auto;
+  padding: 0 2rem;
+
+  max-width: 82rem;
+  min-width: min(80%, 22rem);
+  min-height: 34rem;
+
+  align-items: center;
+  flex-flow: row wrap;
+  justify-content: center;
+  text-align: center;
+  gap: 15rem;
+}
+
+.hide {
+  display: none;
+}
+
+#timer {
+  display: flex;
+  font-size: clamp(9rem, 10rem + 10vw, 12.67rem);
+
+  color: var(--timer-color);
+  filter: var(--shadow);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button svg {
+  width: clamp(3.2rem, 2rem + 15vw, 6.4rem);
+}
+
+#controls {
+  display: flex;
+  gap: 2rem;
+
+  filter: var(--shadow);
+}
+
+.controls-btn:active > svg path {
+  fill: var(--btn-on);
+}
+
+#wrapper-cards {
+  display: grid;
+  grid-template-areas:
+    'A B'
+    'C D';
+
+  gap: 3.2rem;
+}
+
+.card,
+.forest,
+.rain,
+.coffeeshop,
+.fireplace {
+  position: relative;
+  width: 13.8rem;
+  height: 15.2rem;
+  background-color: var(--bg-card);
+  filter: var(--shadow);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 3.2rem;
+  border-radius: 2.4rem;
+  cursor: pointer;
+}
+
+.dark .card,
+.dark .forest,
+.dark .rain,
+.dark .coffeeshop,
+.dark .fireplace {
+  opacity: 0.9;
+}
+
+.card-btn,
+.cardForest,
+.cardRain,
+.cardCoffeeshop,
+.cardFireplace {
+  position: absolute;
+  border-radius: 2.4rem 2.4rem 0 0;
+  width: 100%;
+  height: 11rem;
+}
+
+.card-active {
+  background-color: var(--bg-card-active);
+  transition: 0.5s;
+}
+
+.card-active > button svg path:nth-child(1) {
+  fill: var(--inner-card-active);
+  transition: 0.5s;
+}
+
+.card-active > button svg path:nth-child(2) {
+  fill: var(--inner-card-active);
+  transition: 0.5s;
+}
+
+.card-active input[type='range'],
+.card-active input[type='range']::-webkit-slider-thumb {
+  background: var(--inner-card-active);
+  background-image: var(--inner-card-active);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 9rem;
+  height: 6px;
+  background: var(--input-color);
+  border-radius: 9999px;
+  background-image: linear-gradient(var(--input-color), var(--input-color));
+  position: relative;
+  top: 11.6rem;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background: var(--input-color);
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  body {
+    overflow: hidden;
+    position: absolute;
+  }
+
+  .page {
+    gap: 8rem;
+    padding: 5rem;
+  }
+
+  #theme {
+    position: fixed;
+  }
+
+  #wrapper-cards {
+    gap: 2rem;
+  }
+}
