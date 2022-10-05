@@ -54,4 +54,3 @@ export {
   minutes,
   seconds
 }
-.
